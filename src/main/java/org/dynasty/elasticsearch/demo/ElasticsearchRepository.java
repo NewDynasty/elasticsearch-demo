@@ -3,8 +3,6 @@ package org.dynasty.elasticsearch.demo;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.Data;
-import org.dynasty.elasticsearch.demo.annotations.Id;
 import org.elasticsearch.ElasticsearchException;
 import org.elasticsearch.action.DocWriteResponse;
 import org.elasticsearch.action.admin.indices.delete.DeleteIndexRequest;
@@ -471,25 +469,4 @@ public class ElasticsearchRepository {
         return objectMapper;
     }
 
-    public static void main(String[] args) {
-        SuperUser u = new SuperUser();
-        u.setSex("male");
-        u.setId("123");
-        System.out.println(getVal("id", u));
-    }
-
-}
-
-@Data
-class User {
-    @Id
-    private String id;
-    private String name;
-
-}
-
-@Data
-class SuperUser extends User {
-    @Id
-    private String sex;
 }

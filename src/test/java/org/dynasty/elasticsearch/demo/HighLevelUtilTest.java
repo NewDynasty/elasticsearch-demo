@@ -1,6 +1,7 @@
 package org.dynasty.elasticsearch.demo;
 
 import com.github.jsonzou.jmockdata.JMockData;
+import com.github.jsonzou.jmockdata.MockConfig;
 import org.elasticsearch.action.bulk.BulkResponse;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
@@ -11,7 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.time.LocalDateTime;
 import java.util.*;
+import java.util.stream.IntStream;
 
 /**
  * @author dynasty xiongyuqiao@fishsaying.com yq.xiong0320@gmail.com
@@ -140,4 +143,55 @@ public class HighLevelUtilTest {
         Assert.assertTrue(result3);
     }
 
+    @Test
+    public void mockData() {
+        int num = 10000;
+        List<Document> documentList = new ArrayList<>(num);
+        for (int i = 0; i < num; i++) {
+             Document document = new Document();
+             document.setMysqlId(UUID.randomUUID().toString());
+             document.setDate(JMockData.mock(LocalDateTime.class));
+             document.setTitle(JMockData.mock(String.class, MockConfig.newInstance().stringRegex("[A-Z][a-z]{3,9} [A-Z][a-z]{3,9} [A-Z][a-z]{3,9}")));
+             document.setContent(JMockData.mock(String.class, MockConfig.newInstance().stringRegex("(\\w{3,9}){9,99}")));
+//             document.setRichText();
+             documentList.add(document);
+        }
+        repository.bulkIndex("document", documentList);
+    }
+
+    @Test
+    public void mockTest() {
+        System.out.println(JMockData.mock(String.class, MockConfig.newInstance().stringRegex("[A-Z][a-z]{3,9} [A-Z][a-z]{3,9} [A-Z][a-z]{3,9}")));
+        System.out.println(JMockData.mock(String.class, MockConfig.newInstance().stringRegex("[A-Z][a-z]{3,9} [A-Z][a-z]{3,9} [A-Z][a-z]{3,9}")));
+        System.out.println(JMockData.mock(String.class, MockConfig.newInstance().stringRegex("[A-Z][a-z]{3,9} [A-Z][a-z]{3,9} [A-Z][a-z]{3,9}")));
+        System.out.println(JMockData.mock(String.class, MockConfig.newInstance().stringRegex("[A-Z][a-z]{3,9} [A-Z][a-z]{3,9} [A-Z][a-z]{3,9}")));
+        System.out.println(JMockData.mock(String.class, MockConfig.newInstance().stringRegex("[A-Z][a-z]{3,9} [A-Z][a-z]{3,9} [A-Z][a-z]{3,9}")));
+
+        IntStream stream = new Random().ints(9, 99);
+        final String template = "\\w{3,9} ";
+        stream.limit(5).forEach(x -> {
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < x; i++) {
+                sb.append(template);
+            }
+            System.out.println(JMockData.mock(String.class, MockConfig.newInstance().stringRegex(sb.toString())));
+        });
+    }
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
