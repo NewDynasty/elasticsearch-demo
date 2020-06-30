@@ -38,21 +38,21 @@ public class HighLevelUtilTest {
         repository.createIndex("test-index2", mapSettings, mapMappings);
 
         String strSettings =
-            "{\n" +
-            "  \"index\": {\n" +
-            "    \"number_of_shards\": \"1\",\n" +
-            "    \"number_of_replicas\": \"1\"\n" +
-            "  }\n" +
-            "}";
+                "{\n" +
+                        "  \"index\": {\n" +
+                        "    \"number_of_shards\": \"1\",\n" +
+                        "    \"number_of_replicas\": \"1\"\n" +
+                        "  }\n" +
+                        "}";
 
         String strMappings =
-            "{\n" +
-            "  \"properties\": {\n" +
-            "    \"message\": {\n" +
-            "      \"type\": \"text\"\n" +
-            "    }\n" +
-            "  }\n" +
-            "}";
+                "{\n" +
+                        "  \"properties\": {\n" +
+                        "    \"message\": {\n" +
+                        "      \"type\": \"text\"\n" +
+                        "    }\n" +
+                        "  }\n" +
+                        "}";
         repository.createIndex("test-index3", strSettings, strMappings);
     }
 

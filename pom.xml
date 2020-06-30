@@ -12,9 +12,9 @@
     </parent>
 
     <groupId>org.dynasty</groupId>
-    <artifactId>elasticsearch-demo</artifactId>
+    <artifactId>easy-es</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>elasticsearch-demo</name>
+    <name>easy-es</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>
@@ -28,15 +28,15 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>org.springframework.boot</groupId>-->
-<!--            <artifactId>spring-boot-starter-data-elasticsearch</artifactId>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>org.elasticsearch.client</groupId>-->
-<!--            <artifactId>transport</artifactId>-->
-<!--            <version>${elasticsearch.version}</version>-->
-<!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>org.springframework.boot</groupId>-->
+        <!--            <artifactId>spring-boot-starter-data-elasticsearch</artifactId>-->
+        <!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>org.elasticsearch.client</groupId>-->
+        <!--            <artifactId>transport</artifactId>-->
+        <!--            <version>${elasticsearch.version}</version>-->
+        <!--        </dependency>-->
         <dependency>
             <groupId>org.elasticsearch.client</groupId>
             <artifactId>elasticsearch-rest-high-level-client</artifactId>
@@ -48,11 +48,11 @@
             <!--</exclusion>-->
             <!--</exclusions>-->
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>org.elasticsearch</groupId>-->
-<!--            <artifactId>elasticsearch</artifactId>-->
-<!--            <version>${elasticsearch.version}</version>-->
-<!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>org.elasticsearch</groupId>-->
+        <!--            <artifactId>elasticsearch</artifactId>-->
+        <!--            <version>${elasticsearch.version}</version>-->
+        <!--        </dependency>-->
 
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>

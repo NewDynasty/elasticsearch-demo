@@ -37,6 +37,7 @@ import java.util.*;
 
 /**
  * Elasticsearch High Level Api
+ *
  * @author dynasty yq.xiong0320@gmail.com
  * @since 2020-05-31 14:28:29
  */
@@ -50,9 +51,10 @@ public class ElasticsearchRepository {
 
     /**
      * 自定义查询可以直接获取client
+     *
+     * @return org.elasticsearch.client.RestHighLevelClient
      * @author dynasty yq.xiong0320@gmail.com
      * @since 2020-05-31 22:26:55
-     * @return org.elasticsearch.client.RestHighLevelClient
      */
     public RestHighLevelClient getClient() {
         return client;
@@ -60,6 +62,7 @@ public class ElasticsearchRepository {
 
     /**
      * 创建索引
+     *
      * @param indexName
      */
     public void createIndex(String indexName) {
@@ -76,9 +79,10 @@ public class ElasticsearchRepository {
 
     /**
      * 创建索引
+     *
      * @param indexName
-     * @param settings
-     * @param mappings
+     * @param settings
+     * @param mappings
      */
     public void createIndex(String indexName, Map<String, Object> settings, Map<String, Object> mappings) {
         checkString(indexName, "indexName不能为空");
@@ -96,9 +100,10 @@ public class ElasticsearchRepository {
 
     /**
      * 创建索引
+     *
      * @param indexName
-     * @param settings
-     * @param mappings
+     * @param settings
+     * @param mappings
      */
     public void createIndex(String indexName, String settings, String mappings) {
         checkString(indexName, "indexName不能为空");
@@ -116,6 +121,7 @@ public class ElasticsearchRepository {
 
     /**
      * 判断索引是否存在
+     *
      * @param indexName
      * @return boolean
      */
@@ -133,8 +139,9 @@ public class ElasticsearchRepository {
 
     /**
      * 插入数据到指定索引
+     *
      * @param indexName
-     * @param map
+     * @param map
      * @return boolean
      */
     public <T> boolean index(String indexName, T t) throws IOException {
@@ -166,8 +173,9 @@ public class ElasticsearchRepository {
 
     /**
      * 插入数据到指定索引
+     *
      * @param indexName
-     * @param map
+     * @param map
      * @return boolean
      */
     public boolean index(String indexName, Map<String, Object> map) throws Exception {
@@ -205,7 +213,7 @@ public class ElasticsearchRepository {
             BulkRequest bulkRequest = new BulkRequest();
             ObjectMapper mapper = getObjectMapper();
             IndexRequest request = null;
-            for(T data : list) {
+            for (T data : list) {
                 request = new IndexRequest(indexName);
                 Object val = getVal(idFieldName, data);
                 if (val != null) {
@@ -255,7 +263,7 @@ public class ElasticsearchRepository {
     public <T> void bulkIndexWithProcessor(String indexName, List<T> list) {
         checkString(indexName, "indexName不能为空");
         if (null == list || list.size() == 0) {
-            return ;
+            return;
         }
         String idFieldName = getIdFieldName(list.get(0));
         if (idFieldName == null) {
@@ -266,7 +274,7 @@ public class ElasticsearchRepository {
             BulkProcessor bulkProcessor = init();
             ObjectMapper mapper = getObjectMapper();
             IndexRequest request = null;
-            for(T data : list) {
+            for (T data : list) {
                 request = new IndexRequest(indexName);
                 Object val = getVal(idFieldName, data);
                 if (val != null) {
@@ -285,11 +293,12 @@ public class ElasticsearchRepository {
 
     /**
      * 根据条件删除索引数据
+     *
+     * @param query
+     * @param indexName
+     * @return boolean
      * @author dynasty yq.xiong0320@gmail.com
      * @since 2020-06-01 21:20:21
-     * @param query
-     * @param indexName
-     * @return boolean
      */
     public boolean deleteByQuery(QueryBuilder query, String... indexName) {
         for (String index : indexName) {
@@ -317,6 +326,7 @@ public class ElasticsearchRepository {
 
     /**
      * 删除索引
+     *
      * @param indexName
      * @return boolean
      */
@@ -350,10 +360,11 @@ public class ElasticsearchRepository {
 
     /**
      * 设置索引配置参数
+     *
+     * @param request
+     * @param settings
      * @author dynasty yq.xiong0320@gmail.com
      * @since 2020-05-31 14:34:08
-     * @param request
-     * @param settings
      */
     private void buildSetting(CreateIndexRequest request, Map<String, Object> settings) {
         if (settings != null && settings.size() > 0) {
@@ -363,10 +374,11 @@ public class ElasticsearchRepository {
 
     /**
      * 设置索引配置参数
+     *
+     * @param request
+     * @param settings
      * @author dynasty yq.xiong0320@gmail.com
      * @since 2020-05-31 14:34:08
-     * @param request
-     * @param settings
      */
     private void buildSetting(CreateIndexRequest request, String settings) {
         if (settings != null && settings.length() > 0) {
@@ -376,23 +388,25 @@ public class ElasticsearchRepository {
 
     /**
      * 设置索引映射参数
+     *
+     * @param request
+     * @param settings
      * @author dynasty yq.xiong0320@gmail.com
      * @since 2020-05-31 14:34:08
-     * @param request
-     * @param settings
      */
     private void buildIndexMapping(CreateIndexRequest request, Map<String, Object> mappings) {
         if (mappings != null && mappings.size() > 0) {
             request.mapping(mappings);
         }
     }
-    
+
     /**
      * 设置索引映射参数
+     *
+     * @param request
+     * @param settings
      * @author dynasty yq.xiong0320@gmail.com
      * @since 2020-05-31 14:34:08
-     * @param request
-     * @param settings
      */
     private void buildIndexMapping(CreateIndexRequest request, String mappings) {
         if (mappings != null && mappings.length() > 0) {
