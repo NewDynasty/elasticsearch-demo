@@ -148,13 +148,13 @@ public class HighLevelUtilTest {
         int num = 10000;
         List<Document> documentList = new ArrayList<>(num);
         for (int i = 0; i < num; i++) {
-             Document document = new Document();
-             document.setMysqlId(UUID.randomUUID().toString());
-             document.setDate(JMockData.mock(LocalDateTime.class));
-             document.setTitle(JMockData.mock(String.class, MockConfig.newInstance().stringRegex("[A-Z][a-z]{3,9} [A-Z][a-z]{3,9} [A-Z][a-z]{3,9}")));
-             document.setContent(JMockData.mock(String.class, MockConfig.newInstance().stringRegex("(\\w{3,9}){9,99}")));
+            Document document = new Document();
+            document.setMysqlId(UUID.randomUUID().toString());
+            document.setDate(JMockData.mock(LocalDateTime.class));
+            document.setTitle(JMockData.mock(String.class, MockConfig.newInstance().stringRegex("[A-Z][a-z]{3,9} [A-Z][a-z]{3,9} [A-Z][a-z]{3,9}")));
+            document.setContent(JMockData.mock(String.class, MockConfig.newInstance().stringRegex("(\\w{3,9}){9,99}")));
 //             document.setRichText();
-             documentList.add(document);
+            documentList.add(document);
         }
         repository.bulkIndex("document", documentList);
     }
